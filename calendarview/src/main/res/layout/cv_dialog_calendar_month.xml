@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ @author uis
+ @version 1.0.0
+-->
+<com.uis.calendarview.CalendarMonthView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	app:weekTextSize="12sp"
+	app:weekHeight="30dp"
+	app:tailHeight="0dp"
+	app:dayWidth="36dp"
+	app:dayHeight="36dp"
+	app:weekTextColor="#888888"
+	app:dayTextColor="#333333"
+	app:dayTextDisableColor="#888888"
+	app:daySelectorRadius="13dp"
+	app:daySelectorColor="#FF0091CD"
+	app:dayTextSelectorColor="#333333"
+	app:dayTextSize="14sp"
+>
+</com.uis.calendarview.CalendarMonthView>

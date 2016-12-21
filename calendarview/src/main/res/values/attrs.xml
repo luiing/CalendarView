@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<declare-styleable name="TechMonthView">
+		<attr name="isEnableMonth" format="boolean"/>
+		<!--"日,一,二,三,四,五,六"-->
+		<attr name="weekNameArray" format="string" />
+		<attr name="weekTextSize" format="dimension" />
+		<attr name="dayTextSize" format="dimension" />
+		<attr name="weekHeight" format="dimension" />
+		<attr name="tailHeight" format="dimension" />
+		<attr name="dayHeight" format="dimension" />
+		<attr name="dayWidth" format="dimension" />
+		<attr name="daySelectorRadius" format="dimension" />
+		<attr name="daySelectorStroke" format="dimension" />
+
+		<attr name="weekTextColor" format="color|reference" />
+		<attr name="dayTextColor" format="color|reference" />
+		<attr name="dayTextDisableColor" format="color|reference" />
+		<attr name="dayTextSelectorColor" format="color|reference" />
+		<attr name="daySelectorColor" format="color|reference"/>
+	</declare-styleable>
+</resources>

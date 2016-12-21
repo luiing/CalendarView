@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ @author uis
+ @version 1.0.0
+-->
+<com.uis.calendarview.CalendarMonthView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@mipmap/calendar_bg"
+	app:isEnableMonth="false"
+>
+</com.uis.calendarview.CalendarMonthView>
