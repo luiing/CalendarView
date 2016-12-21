@@ -9,7 +9,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="@mipmap/calendar_bg"
+	android:background="@mipmap/cv_calendar_bg"
 	app:isEnableMonth="false"
 >
 </com.uis.calendarview.CalendarMonthView>

@@ -1,11 +1,16 @@
 package com.uis.calendarview;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.v4.util.ArrayMap;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+
 import java.util.Calendar;
 import java.util.Map;
 
@@ -14,8 +19,9 @@ import java.util.Map;
  * @version 1.0.0
  */
 
-public class CalendarView{
+public class CalendarView extends FrameLayout{
 
+    private static final int MAX = 100000;
     private OnCalendarCall mListener;
     private boolean IsDayClicked = false;
     private int DayClickedDay = -1;
@@ -29,24 +35,94 @@ public class CalendarView{
     private final int mYear;
     private final int mMonth;
     private final int mDay;
+    private int monthViewId = 0;
 
+    public CalendarView(Context context) {
+        this(context,null);
+    }
 
-    public CalendarView(Context c) {
+    public CalendarView(Context context, AttributeSet attrs) {
+        this(context, attrs,0);
+    }
+
+    public CalendarView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        final TypedArray attr = context.obtainStyledAttributes(attrs, R.styleable.CalendarView, defStyleAttr,0);
+        monthViewId = attr.getResourceId(R.styleable.CalendarView_monthViewId,R.layout.cv_view_calendar_month);
+        attr.recycle();
         final Calendar calendar = Calendar.getInstance();
         mYear =calendar.get(Calendar.YEAR);
         mMonth = calendar.get(Calendar.MONTH);
         mDay = calendar.get(Calendar.DATE);
+        init();
+    }
 
+    private void init(){
+        viewPager = new ViewPager(getContext());
+        addView(viewPager);
+        final CalendarAdapter mAdapter = new CalendarAdapter(getContext());
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                currentMonth = mAdapter.getItem(position);
+                if(currentMonth==null)return;
+                    /*LogUtil.e("xx","pos="+position+",m="+currentMonth.getMonth()+",day="+currentMonth.getDay()+
+                            ",year="+currentMonth.getYear()+ ",cur="+viewPager.getCurrentItem());*/
+                final int curMonth = currentMonth.getMonth();
+                final int curDay = currentMonth.getDay();
+                final int curYear = currentMonth.getYear();
+                if(IsDayClicked){
+                    //LogUtil.e("xx","cury="+curYear+",curM="+curMonth+",y="+selectYear+",m="+selectMonth);
+                    if(selectYear==curYear && selectMonth==curMonth){//同一月份
+                        IsDayClicked = false;
+                        currentMonth.selectDay(DayClickedDay);
+                        DayClickedDay = -1;
+                    }else{
+                        //LogUtil.e("xx","days="+currentMonth.getDaysInMonth()+",d="+DayClickedDay);
+                        IsDayClicked = false;
+                        currentMonth.selectDay(DayClickedDay);
+                        DayClickedDay = -1;
+                    }
+                }else{
+                    if(selectYear==curYear && selectMonth==curMonth && selectDay>0){
+                        currentMonth.markDay(selectDay);
+                        if(mListener!=null){
+                            mListener.onDay(currentMonth.getCurentCalendar());
+                        }
+                    }else{
+                        currentMonth.markDay(-1);
+                        if(mListener!=null){
+                            mListener.onMonth(currentMonth.getCurentCalendar());
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        viewPager.setAdapter(mAdapter);
+        viewPager.setCurrentItem(MAX/2);
     }
 
     public void setOnCalendarCall(OnCalendarCall listener){
         mListener = listener;
     }
+
     public void markDay(int[] send){
         markDay(null,send);
     }
+
     //标记
-    private void markDay(int[] diff,int[] send){
+    public void markDay(int[] diff,int[] send){
         if(currentMonth!=null){
             currentMonth.markDay(diff,send);
         }
@@ -100,7 +176,6 @@ public class CalendarView{
     private CalendarMonthView.OnDayClickListener Listener = new CalendarMonthView.OnDayClickListener() {
         @Override
         public void onDayClick(CalendarMonthView view, Calendar day) {
-            //LogUtil.e("Adapter", DateFactory.getTimeFull( (int)(day.getTimeInMillis()/1000) ) );
             selectDay = day.get(Calendar.DATE);
             selectMonth = day.get(Calendar.MONTH);
             selectYear = day.get(Calendar.YEAR);
@@ -129,65 +204,6 @@ public class CalendarView{
         }
     };
 
-
-        void setCalendar(View convertView){
-            //viewPager = (ViewPager) convertView.findViewById(R.id.calendar_viewpager);
-            //TextView tv = (TextView)convertView.findViewById(R.id.calendar_text_diff);
-            //tv.setText(isBuy?l.getString(R.string.schedule_remark_diff_buy):l.getString(R.string.schedule_remark_diff_sell));
-            final CalendarAdapter mAdapter = new CalendarAdapter(convertView.getContext());
-            viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-                @Override
-                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-                }
-
-                @Override
-                public void onPageSelected(int position) {
-                    currentMonth = mAdapter.getItem(position);
-                    if(currentMonth==null)return;
-                    /*LogUtil.e("xx","pos="+position+",m="+currentMonth.getMonth()+",day="+currentMonth.getDay()+
-                            ",year="+currentMonth.getYear()+ ",cur="+viewPager.getCurrentItem());*/
-                    final int curMonth = currentMonth.getMonth();
-                    final int curDay = currentMonth.getDay();
-                    final int curYear = currentMonth.getYear();
-                    if(IsDayClicked){
-                        //LogUtil.e("xx","cury="+curYear+",curM="+curMonth+",y="+selectYear+",m="+selectMonth);
-                        if(selectYear==curYear && selectMonth==curMonth){//同一月份
-                            IsDayClicked = false;
-                            currentMonth.selectDay(DayClickedDay);
-                            DayClickedDay = -1;
-                        }else{
-                            //LogUtil.e("xx","days="+currentMonth.getDaysInMonth()+",d="+DayClickedDay);
-                            IsDayClicked = false;
-                            currentMonth.selectDay(DayClickedDay);
-                            DayClickedDay = -1;
-                        }
-                    }else{
-                        if(selectYear==curYear && selectMonth==curMonth && selectDay>0){
-                            currentMonth.markDay(selectDay);
-                            if(mListener!=null){
-                                mListener.onDay(currentMonth.getCurentCalendar());
-                            }
-                        }else{
-                            currentMonth.markDay(-1);
-                            if(mListener!=null){
-                                mListener.onMonth(currentMonth.getCurentCalendar());
-                            }
-                        }
-                    }
-                }
-
-                @Override
-                public void onPageScrollStateChanged(int state) {
-
-                }
-            });
-            //viewPager.setOffscreenPageLimit(3);
-            viewPager.setAdapter(mAdapter);
-            viewPager.setCurrentItem(MAX/2);
-        }
-    private static final int MAX = 100000;
     private class CalendarAdapter extends PagerAdapter {
         private Context mc;
 
@@ -203,8 +219,7 @@ public class CalendarView{
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            final CalendarMonthView monthView = new CalendarMonthView(mc);
-
+            final CalendarMonthView monthView = (CalendarMonthView) LayoutInflater.from(getContext()).inflate(monthViewId,null);
             int result = mMonth + position - MAX/2;
             int y;
             int m;
@@ -249,6 +264,4 @@ public class CalendarView{
             return view == object;
         }
     }
-
-
 }

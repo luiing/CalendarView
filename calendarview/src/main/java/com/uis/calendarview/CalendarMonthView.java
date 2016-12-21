@@ -112,29 +112,29 @@ public class CalendarMonthView extends View {
     public CalendarMonthView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         final Resources res = context.getResources();
-        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TechMonthView, defStyleAttr,0);
+        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CalendarMonthView, defStyleAttr,0);
 
-        isEnableMonth = a.getBoolean(R.styleable.TechMonthView_isEnableMonth,false);
+        isEnableMonth = a.getBoolean(R.styleable.CalendarMonthView_isEnableMonth,false);
         mDesiredMonthHeight = isEnableMonth ? dp2px(res,mDesiredMonthHeight) : 0;
-        final String weekNameArray = a.getString(R.styleable.TechMonthView_weekNameArray);
+        final String weekNameArray = a.getString(R.styleable.CalendarMonthView_weekNameArray);
         if(!TextUtils.isEmpty(weekNameArray)){
             mDayOfWeekLabels = split(weekNameArray,",");
         }
         monthTextSize = dp2px(res,16);
-        weekTextSize = a.getDimensionPixelSize(R.styleable.TechMonthView_weekTextSize, dp2px(res,10) );
-        dayTextSize = a.getDimensionPixelSize(R.styleable.TechMonthView_dayTextSize, dp2px(res,16) );
-        int weekHeight = a.getDimensionPixelSize(R.styleable.TechMonthView_weekHeight, dp2px(res,30) );
-        int dayHeight = a.getDimensionPixelSize(R.styleable.TechMonthView_dayHeight, dp2px(res,36) );
-        int dayWidth = a.getDimensionPixelSize(R.styleable.TechMonthView_dayWidth, dp2px(res,36) );
-        int daySelectorRadius = a.getDimensionPixelSize(R.styleable.TechMonthView_daySelectorRadius, dp2px(res,13) );
-        int daySelectorStroke = a.getDimensionPixelSize(R.styleable.TechMonthView_daySelectorStroke, dp2px(res,1.5f));
-        int tailHeight = a.getDimensionPixelSize(R.styleable.TechMonthView_tailHeight, dp2px(res,10));;
+        weekTextSize = a.getDimensionPixelSize(R.styleable.CalendarMonthView_weekTextSize, dp2px(res,10) );
+        dayTextSize = a.getDimensionPixelSize(R.styleable.CalendarMonthView_dayTextSize, dp2px(res,16) );
+        int weekHeight = a.getDimensionPixelSize(R.styleable.CalendarMonthView_weekHeight, dp2px(res,30) );
+        int dayHeight = a.getDimensionPixelSize(R.styleable.CalendarMonthView_dayHeight, dp2px(res,36) );
+        int dayWidth = a.getDimensionPixelSize(R.styleable.CalendarMonthView_dayWidth, dp2px(res,36) );
+        int daySelectorRadius = a.getDimensionPixelSize(R.styleable.CalendarMonthView_daySelectorRadius, dp2px(res,13) );
+        int daySelectorStroke = a.getDimensionPixelSize(R.styleable.CalendarMonthView_daySelectorStroke, dp2px(res,1.5f));
+        int tailHeight = a.getDimensionPixelSize(R.styleable.CalendarMonthView_tailHeight, dp2px(res,10));;
 
-        weekTextColor = a.getColor(R.styleable.TechMonthView_weekTextColor, this.weekTextColor);
-        dayTextColor  = a.getColor(R.styleable.TechMonthView_dayTextColor, this.dayTextColor);
-        dayTextSelectedColor  = a.getColor(R.styleable.TechMonthView_dayTextSelectorColor,this.dayTextSelectedColor);
-        dayTextDisableColor  = a.getColor(R.styleable.TechMonthView_dayTextDisableColor,this.dayTextDisableColor);
-        daySelectedColor =  a.getColor(R.styleable.TechMonthView_daySelectorColor,this.daySelectedColor);
+        weekTextColor = a.getColor(R.styleable.CalendarMonthView_weekTextColor, this.weekTextColor);
+        dayTextColor  = a.getColor(R.styleable.CalendarMonthView_dayTextColor, this.dayTextColor);
+        dayTextSelectedColor  = a.getColor(R.styleable.CalendarMonthView_dayTextSelectorColor,this.dayTextSelectedColor);
+        dayTextDisableColor  = a.getColor(R.styleable.CalendarMonthView_dayTextDisableColor,this.dayTextDisableColor);
+        daySelectedColor =  a.getColor(R.styleable.CalendarMonthView_daySelectorColor,this.daySelectedColor);
         a.recycle();
         mDesiredWeekHeight = weekHeight;
         mDesiredDayHeight = dayHeight;

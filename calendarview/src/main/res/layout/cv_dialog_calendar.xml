@@ -9,7 +9,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="vertical"
-		android:background="@drawable/fillet_dialog_button"
+		android:background="@drawable/cv_fillet_dialog_button"
 		>
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -19,7 +19,7 @@
 			<ImageView android:id="@+id/dialog_left"
 			           android:layout_width="wrap_content"
 			           android:layout_height="wrap_content"
-			           android:src="@drawable/ic_chevron_start"
+			           android:src="@drawable/cv_chevron_start"
 			           android:clickable="true"
 			           android:layout_marginLeft="10dp"
 				/>
@@ -34,7 +34,7 @@
 			<ImageView android:id="@+id/dialog_right"
 			           android:layout_width="wrap_content"
 			           android:layout_height="wrap_content"
-			           android:src="@drawable/ic_chevron_end"
+			           android:src="@drawable/cv_chevron_end"
 			           android:clickable="true"
 			           android:layout_marginRight="10dp"
 				/>

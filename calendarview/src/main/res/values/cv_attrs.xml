@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<declare-styleable name="TechMonthView">
+	<declare-styleable name="CalendarMonthView">
 		<attr name="isEnableMonth" format="boolean"/>
 		<!--"日,一,二,三,四,五,六"-->
 		<attr name="weekNameArray" format="string" />
@@ -18,5 +18,8 @@
 		<attr name="dayTextDisableColor" format="color|reference" />
 		<attr name="dayTextSelectorColor" format="color|reference" />
 		<attr name="daySelectorColor" format="color|reference"/>
+	</declare-styleable>
+	<declare-styleable name="CalendarView">
+		<attr name="monthViewId" format="integer|reference" />
 	</declare-styleable>
 </resources>

@@ -140,10 +140,6 @@ public class CalendarDialog {
         tv_date.setText(CalendarMonthView.getTime(DateFormat,millis));
     }
 
-    public void show(){
-        show(null);
-    }
-
     public void show(OnDayListener call){
         if(dialog==null) {
             dialog = builder.setView(root).create();
