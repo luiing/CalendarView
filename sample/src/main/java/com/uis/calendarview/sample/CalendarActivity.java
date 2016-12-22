@@ -1,32 +1,37 @@
 package com.uis.calendarview.sample;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import com.uis.calendarview.CalendarDialog;
 import com.uis.calendarview.CalendarMonthView;
 import com.uis.calendarview.CalendarView;
 
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+/**
+ * @author uis
+ * @version 1.1.1
+ * @see {date:2016/12/22 12:35}
+ */
+
+public class CalendarActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView tv;
     private CalendarView calendarView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_calendar);
         tv = (TextView)findViewById(R.id.tv);
         calendarView = (CalendarView)findViewById(R.id.calendarView);
-        Button bt = (Button)findViewById(R.id.bt);
 
         tv.setOnClickListener(this);
-        bt.setOnClickListener(this);
         calendarView.setOnCalendarCall(new CalendarView.OnCalendarCall() {
             @Override
             public void onDay(Calendar day) {
@@ -51,9 +56,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         tv.setText(CalendarMonthView.getTime("yyyy-MM-dd HH:mm:ss", millis));
                     }
                 });
-                break;
-            case R.id.bt:
-                startActivity(new Intent(this,CalendarActivity.class));
                 break;
         }
     }

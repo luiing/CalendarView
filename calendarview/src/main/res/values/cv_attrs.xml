@@ -2,6 +2,10 @@
 <resources>
 	<declare-styleable name="CalendarMonthView">
 		<attr name="isEnableMonth" format="boolean"/>
+		<attr name="monthFormat" format="string" />
+		<attr name="monthHeight" format="dimension" />
+		<attr name="monthTextSize" format="dimension" />
+		<attr name="monthTextColor" format="color|reference" />
 		<!--"日,一,二,三,四,五,六"-->
 		<attr name="weekNameArray" format="string" />
 		<attr name="weekTextSize" format="dimension" />

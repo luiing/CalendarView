@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.uis.calendarview.sample.MainActivity">
+    tools:context="com.uis.calendarview.sample.CalendarActivity">
 
     <TextView android:id="@+id/tv"
         android:layout_width="match_parent"
@@ -15,13 +16,8 @@
     <com.uis.calendarview.CalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
-        android:layout_height="256dp"
+        android:layout_height="288dp"
+        app:monthViewId="@layout/calendar_month"
         android:layout_below="@id/tv">
     </com.uis.calendarview.CalendarView>
-    <Button android:id="@+id/bt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/calendarView"
-        android:layout_margin="10dp"
-        android:text="open other CalendarView"/>
 </RelativeLayout>

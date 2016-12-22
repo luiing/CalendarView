@@ -1,6 +1,6 @@
 # CalendarView
-![image](https://github.com/luiing/CalendarView/blob/master/calendarDialog.png)
-
+![image](/luiing/CalendarView/blob/master/calendarDialog.png)
+![image](/luiing/CalendarView/blob/master/sample_pic.png)
 CalendarDialog,CalendarView,CalendarMonthView is here.
 #Use
 compile ''

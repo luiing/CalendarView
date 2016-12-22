@@ -35,6 +35,7 @@ public class CalendarMonthView extends View {
     private static final int DEFAULT_WEEK_START = Calendar.SUNDAY;
 
     private int weeksNum = MAX_WEEKS_IN_MONTH;
+    private String monthFormat;
     private int mDesiredMonthHeight = 32;//16
 
     private int mDesiredWeekHeight = 30;//10
@@ -84,8 +85,6 @@ public class CalendarMonthView extends View {
     private final Locale mLocale;
     private final NumberFormat mDayFormatter;
 
-    private String mMonthYearLabel;
-
     private int mMonth = 0;
     private int mYear = 0;
 
@@ -115,12 +114,17 @@ public class CalendarMonthView extends View {
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CalendarMonthView, defStyleAttr,0);
 
         isEnableMonth = a.getBoolean(R.styleable.CalendarMonthView_isEnableMonth,false);
-        mDesiredMonthHeight = isEnableMonth ? dp2px(res,mDesiredMonthHeight) : 0;
+        monthFormat = a.getString(R.styleable.CalendarMonthView_monthFormat);
+        if(TextUtils.isEmpty(monthFormat)){
+            monthFormat = MONTH_YEAR_FORMAT;
+        }
+        mDesiredMonthHeight = a.getDimensionPixelSize(R.styleable.CalendarMonthView_monthHeight,dp2px(res,mDesiredMonthHeight) );
+        mDesiredMonthHeight = isEnableMonth ? mDesiredMonthHeight : 0;
         final String weekNameArray = a.getString(R.styleable.CalendarMonthView_weekNameArray);
         if(!TextUtils.isEmpty(weekNameArray)){
             mDayOfWeekLabels = split(weekNameArray,",");
         }
-        monthTextSize = dp2px(res,16);
+        monthTextSize = a.getDimensionPixelSize(R.styleable.CalendarMonthView_monthTextSize,dp2px(res,16) );
         weekTextSize = a.getDimensionPixelSize(R.styleable.CalendarMonthView_weekTextSize, dp2px(res,10) );
         dayTextSize = a.getDimensionPixelSize(R.styleable.CalendarMonthView_dayTextSize, dp2px(res,16) );
         int weekHeight = a.getDimensionPixelSize(R.styleable.CalendarMonthView_weekHeight, dp2px(res,30) );
@@ -130,6 +134,7 @@ public class CalendarMonthView extends View {
         int daySelectorStroke = a.getDimensionPixelSize(R.styleable.CalendarMonthView_daySelectorStroke, dp2px(res,1.5f));
         int tailHeight = a.getDimensionPixelSize(R.styleable.CalendarMonthView_tailHeight, dp2px(res,10));;
 
+        monthTextColor = a.getColor(R.styleable.CalendarMonthView_monthTextColor, this.monthTextColor);
         weekTextColor = a.getColor(R.styleable.CalendarMonthView_weekTextColor, this.weekTextColor);
         dayTextColor  = a.getColor(R.styleable.CalendarMonthView_dayTextColor, this.dayTextColor);
         dayTextSelectedColor  = a.getColor(R.styleable.CalendarMonthView_dayTextSelectorColor,this.dayTextSelectedColor);
@@ -164,7 +169,6 @@ public class CalendarMonthView extends View {
     }
 
     private void initLable() {
-        mMonthYearLabel = getTime(MONTH_YEAR_FORMAT,mCalendar.getTimeInMillis());
         if(mDayOfWeekLabels==null) {
             mDayOfWeekLabels = split("日,一,二,三,四,五,六",",");
         }
@@ -276,9 +280,8 @@ public class CalendarMonthView extends View {
         final int paddingLeft = getPaddingLeft();
         final int paddingTop = getPaddingTop();
         canvas.translate(paddingLeft, paddingTop);
-        if(isEnableMonth) {
-            drawMonth(canvas);
-        }
+
+        drawMonth(canvas);
         drawDaysOfWeek(canvas);
         drawDays(canvas);
 
@@ -286,12 +289,14 @@ public class CalendarMonthView extends View {
     }
 
     void drawMonth(Canvas canvas) {
+        if(!isEnableMonth) {
+            return;
+        }
         final float x = mPaddedWidth / 2f;
         // Vertically centered within the month header height.
         final float lineHeight = mMonthPaint.ascent() + mMonthPaint.descent();
         final float y = (mMonthHeight - lineHeight) / 2f;
-
-        canvas.drawText(mMonthYearLabel, x, y, mMonthPaint);
+        canvas.drawText(getTime(monthFormat,mCalendar.getTimeInMillis()), x, y, mMonthPaint);
     }
 
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ @author uis
+ @version 1.0.0
+-->
+<com.uis.calendarview.CalendarMonthView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="#ffffff"
+	app:isEnableMonth="true"
+	app:monthFormat="yyyy年MM月"
+	app:monthTextColor="#888888"
+	app:weekNameArray="Sun,Mon,Tue,Wed,Thur,Fri,Sat"
+	app:weekTextColor="#888888"
+	app:dayTextColor="#333333"
+	app:dayTextDisableColor="#888888"
+	app:dayTextSelectorColor="#ff0000"
+>
+</com.uis.calendarview.CalendarMonthView>
