@@ -5,9 +5,9 @@ CalendarDialog,CalendarView,CalendarMonthView is here.
 #Use
 compile 'com.uis:calendarview:1.0.0'
 
+[aar download](https://bintray.com/sweet/maven/download_file?file_path=com%2Fuis%2Fcalendarview%2F1.0.0%2Fcalendarview-1.0.0.aar)
 #Thanks
 thanks to android.widget.CalendarView
-
 #License
 Copyright 2016 uis, Inc.
 
