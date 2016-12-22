@@ -3,7 +3,7 @@
 ![image](/sample_pic.png)
 CalendarDialog,CalendarView,CalendarMonthView is here.
 #Use
-compile ''
+compile 'com.uis:calendarview:1.0.0'
 
 #Thanks
 thanks to android.widget.CalendarView
