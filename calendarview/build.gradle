@@ -53,11 +53,11 @@ install {
                 }
                 developers {
                     developer {
-                        id 'luiing'
+                        id 'sweet'//org unique id
                         // #CONFIG# // your user id (you can write your nickname)
-                        name 'uis'
+                        name 'luiing'//current user id
                         // #CONFIG# // your user name
-                        email 'nculhb@vip.qq.com'
+                        email '1170558362@qq.com'
                         // #CONFIG# // your email
                     }
                 }
@@ -99,6 +99,7 @@ bintray {
     key = properties.getProperty("bintray.apikey")
     configurations = ['archives']
     pkg {
+        userOrg = "sweet"
         repo = "maven"
         name = "calendarview"
         // #CONFIG# project name in jcenter
