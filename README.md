@@ -3,13 +3,18 @@
 ![image](/sample_pic.png)
 CalendarDialog,CalendarView,CalendarMonthView is here.
 #Use
-compile 'com.uis:calendarview:1.0.0'
+compile 'com.uis:calendarview:1.0.1'
 
-[aar download](https://bintray.com/sweet/maven/download_file?file_path=com%2Fuis%2Fcalendarview%2F1.0.0%2Fcalendarview-1.0.0.aar)
+[aar download](https://bintray.com/sweet/maven/download_file?file_path=com%2Fuis%2Fcalendarview%2F1.0.1%2Fcalendarview-1.0.1.aar)
 #About author
 If you have any questions or ideas about calendarView,please contact.
 
 email:nculhb@vip.qq.com,luiing@foxmail.com,uis2uis@gmail.com
+#Version
+1)*v1.0.0*   CalendarView,CalendarDialog use different adapter.
+
+2)*v1.0.1*   CalendarDialog remove the adapter,direct use CalendarView,it makes more simple.CalendarView just set android:layout_width="wrap_content".
+
 #Thanks
 thanks to android.widget.CalendarView
 #License
