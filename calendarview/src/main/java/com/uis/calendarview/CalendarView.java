@@ -16,7 +16,7 @@ import java.util.Map;
 
 /**
  * @author uis
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 public class CalendarView extends FrameLayout{
@@ -60,7 +60,11 @@ public class CalendarView extends FrameLayout{
     private void init(){
         viewPager = new ViewPager(getContext());
         addView(viewPager);
-        final CalendarAdapter mAdapter = new CalendarAdapter(getContext());
+        ViewGroup.LayoutParams params = viewPager.getLayoutParams();
+        final CalendarMonthView monthView = (CalendarMonthView) LayoutInflater.from(getContext()).inflate(monthViewId,null);
+        params.height = monthView.getMonthHeight();
+        viewPager.setLayoutParams(params);
+        final CalendarAdapter mAdapter = new CalendarAdapter();
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             @Override
@@ -72,19 +76,15 @@ public class CalendarView extends FrameLayout{
             public void onPageSelected(int position) {
                 currentMonth = mAdapter.getItem(position);
                 if(currentMonth==null)return;
-                    /*LogUtil.e("xx","pos="+position+",m="+currentMonth.getMonth()+",day="+currentMonth.getDay()+
-                            ",year="+currentMonth.getYear()+ ",cur="+viewPager.getCurrentItem());*/
                 final int curMonth = currentMonth.getMonth();
                 final int curDay = currentMonth.getDay();
                 final int curYear = currentMonth.getYear();
                 if(IsDayClicked){
-                    //LogUtil.e("xx","cury="+curYear+",curM="+curMonth+",y="+selectYear+",m="+selectMonth);
                     if(selectYear==curYear && selectMonth==curMonth){//同一月份
                         IsDayClicked = false;
                         currentMonth.selectDay(DayClickedDay);
                         DayClickedDay = -1;
                     }else{
-                        //LogUtil.e("xx","days="+currentMonth.getDaysInMonth()+",d="+DayClickedDay);
                         IsDayClicked = false;
                         currentMonth.selectDay(DayClickedDay);
                         DayClickedDay = -1;
@@ -128,8 +128,8 @@ public class CalendarView extends FrameLayout{
         }
     }
 
-    //滑动
-    public void selectedDay(boolean isPre){//true:pre,false:next
+    //按照天数选择
+    public void selectByDay(boolean isPre){//true:pre,false:next
         if(viewPager!=null && currentMonth!=null){
             if(selectDay == -1){
                 return;
@@ -160,8 +160,36 @@ public class CalendarView extends FrameLayout{
         }
     }
 
-    //选择
-    private void selectMonth(int year,int month){
+    public void selectByDay(long millis){
+        final Calendar mcalendar = Calendar.getInstance();
+        mcalendar.setTimeInMillis(millis);
+        selectByDay(mcalendar.get(Calendar.YEAR),mcalendar.get(Calendar.MONTH),mcalendar.get(Calendar.DATE));
+    }
+
+    public void selectByDay(int year,int month,int day){
+        if(viewPager!=null && (month<12&&month>=0)){
+            final int position = 12*(year-mYear) + (month - mMonth);
+            final int skipPosition = MAX/2+position;
+            selectYear = year;
+            selectMonth = month;
+            selectDay = day;
+            if(skipPosition == viewPager.getCurrentItem()){
+                if(currentMonth!=null) {
+                    currentMonth.selectDay(day);
+                }
+            }else {
+                viewPager.setCurrentItem(skipPosition, false);
+            }
+        }
+    }
+
+    public void swipByMonth(boolean isPre){
+        if(null != viewPager){
+            viewPager.setCurrentItem( viewPager.getCurrentItem()+(isPre?-1:1),true);
+        }
+    }
+
+    public void swipByDate(int year,int month){
         if(viewPager!=null){
             final int position = 12*(year-mYear) + (month - mMonth);
             viewPager.setCurrentItem(MAX/2+position);
@@ -205,12 +233,9 @@ public class CalendarView extends FrameLayout{
     };
 
     private class CalendarAdapter extends PagerAdapter {
-        private Context mc;
-
         private Map<Integer,CalendarMonthView> map = new ArrayMap<>();
 
-        private CalendarAdapter(Context mc) {
-            this.mc = mc;
+        private CalendarAdapter() {
         }
 
         private CalendarMonthView getItem(int position){

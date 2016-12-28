@@ -11,6 +11,7 @@ import android.os.Build;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,7 +24,7 @@ import java.util.Locale;
 
 /**
  * @author uis
- * @version 1.0.0
+ * @version 1.0.1
  */
 public class CalendarMonthView extends View {
 
@@ -153,7 +154,11 @@ public class CalendarMonthView extends View {
         mCalendar = Calendar.getInstance(mLocale);
         initLable();
         initPaints();
-        //setTechMothParams(mCalendar.get(Calendar.YEAR),mCalendar.get(Calendar.MONTH));
+        Log.e("xx","month init...");
+    }
+
+    /*package*/ int getMonthHeight(){
+        return mDesiredDayHeight * weeksNum + mDesiredWeekHeight + mDesiredMonthHeight + bottomHeight;
     }
 
     private Calendar getCalendar(){
@@ -224,11 +229,8 @@ public class CalendarMonthView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        final int preferredHeight = mDesiredDayHeight * weeksNum
-                + mDesiredWeekHeight + mDesiredMonthHeight
-                + getPaddingTop() + getPaddingBottom() + bottomHeight;
-        final int preferredWidth = mDesiredCellWidth * DAYS_IN_WEEK
-                + getPaddingLeft() + getPaddingRight();
+        final int preferredHeight = mDesiredDayHeight * weeksNum + mDesiredWeekHeight + mDesiredMonthHeight + getPaddingTop() + getPaddingBottom() + bottomHeight;
+        final int preferredWidth = mDesiredCellWidth * DAYS_IN_WEEK + getPaddingLeft() + getPaddingRight();
 //        LogUtil.e("xx","hMeasureSpec="+heightMeasureSpec+",height="+preferredHeight+",dayH="+mDesiredDayHeight+",weekH="+mDesiredWeekHeight+
 //            ",monthH="+mDesiredMonthHeight+",pTop="+getPaddingTop()+",pBottom="+getPaddingBottom()+",bootom="+bottomHeight);
         final int resolvedWidth = resolveSize(preferredWidth, widthMeasureSpec);
