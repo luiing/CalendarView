@@ -13,7 +13,8 @@ email:nculhb@vip.qq.com,luiing@foxmail.com,uis2uis@gmail.com
 #Version
 1)*v1.0.0*   CalendarView,CalendarDialog use different adapter.
 
-2)*v1.0.1*   CalendarDialog remove the adapter,direct use CalendarView,it makes more simple.CalendarView just set android:layout_width="wrap_content".
+2)*v1.0.1*   CalendarDialog remove the adapter,direct use CalendarView,it makes more simple.
+	CalendarView just set android:layout_width="match_parent" android:layout_height="wrap_content".
 
 #Thanks
 thanks to android.widget.CalendarView
