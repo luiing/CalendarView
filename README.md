@@ -9,7 +9,7 @@ compile 'com.uis:calendarview:1.0.1'
 #About author
 If you have any questions or ideas about calendarView,please contact.
 
-email:nculhb@vip.qq.com,luiing@foxmail.com,uis2uis@gmail.com
+email:luiing@foxmail.com
 #Version
 1)*v1.0.0*   CalendarView,CalendarDialog use different adapter.
 
