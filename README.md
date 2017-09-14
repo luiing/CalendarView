@@ -7,10 +7,13 @@ compile 'com.uis:calendarview:1.0.1'
 
 [aar download](https://bintray.com/sweet/maven/download_file?file_path=com%2Fuis%2Fcalendarview%2F1.0.1%2Fcalendarview-1.0.1.aar)
 #About author
+
 If you have any questions or ideas about calendarView,please contact.
 
 email:luiing@foxmail.com
+
 #Version
+
 1)*v1.0.0*   CalendarView,CalendarDialog use different adapter.
 
 2)*v1.0.1*   CalendarDialog remove the adapter,direct use CalendarView,it makes more simple.
